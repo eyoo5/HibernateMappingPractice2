@@ -1,10 +1,7 @@
+package models;
 
 import jakarta.persistence.*;
-
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import lombok.*;
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -16,13 +13,27 @@ import java.io.Serializable;
 //jakarta annotation:
 @Entity
 @Table
-public class Doctors implements Serializable {
+public class Doctor implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int doctorId;
     private String doctorName;
+
+    @ManyToOne
+    private Hospital hospital;
+
+    public Doctor(String doctorName, Hospital hospital) {
+        super();
+        this.doctorName = doctorName;
+        this.hospital = hospital;
+    }
+
+    //Constructor
+    public Doctor( String doctorName) {
+        this.doctorName = doctorName;
+    }
 
 
 }
